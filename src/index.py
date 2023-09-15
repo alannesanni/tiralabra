@@ -3,9 +3,10 @@ from ui import Kayttoliittyma
 
 
 def main():
-    tiedot=Tiedot()
-    ui=Kayttoliittyma(tiedot)
+    tiedot = Tiedot()
+    ui = Kayttoliittyma(tiedot)
     ui.loop()
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()
