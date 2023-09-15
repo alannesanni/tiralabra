@@ -1,5 +1,5 @@
 # Viikko 2
-- Aloitin pelin tekemisen koodaamalla pelin toimivaksi ensin tekstikäyttöliittymällä ja sitten lisäsin graafisen käyttöliittymän. Peli on nyt pelattava kahden ihmispelaajan välillä ja tullistaa kaikki voitot ja tasapelin.
+- Aloitin pelin tekemisen koodaamalla pelin toimivaksi ensin tekstikäyttöliittymällä ja sitten lisäsin graafisen käyttöliittymän. Peli on nyt pelattava kahden ihmispelaajan välillä ja se tunnistaa kaikki voitot ja tasapelin.
 
 - Loin testit unittestin avulla ConnectFour ja Tiedot luokille. Lisäsin koodiin docstring-dokumentoinnin.
 ![image](https://github.com/alannesanni/tiralabra/assets/128046458/647688b2-422b-4909-9f07-1614df8010e0)
