@@ -1,7 +1,7 @@
 # Testausdokumentti
 Pelin luokkia on testattu unittesteillä. Testit löytyvät kansiosta src/tests
 
-Testit voidaan suorittaa komennolla `poetry run  invoke test`
+Testit voidaan suorittaa komennolla `poetry run invoke test`
 
 Testikattavuusraportin saa komennolla `poetry run invoke coverage-report`
 
