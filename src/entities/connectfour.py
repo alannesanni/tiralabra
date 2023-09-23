@@ -15,7 +15,7 @@ class ConnectFour:
             pelaaja= Vuorossa oleva pelaaja
         """
         self.tiedot = tiedot
-        self.pelilauta = self.tiedot.matriisi
+        #self.tiedot.matriisi = self.tiedot.matriisi
         self.pelaaja = self.tiedot.pelaaja
 
     def vuoro(self, rivi):
@@ -32,8 +32,8 @@ class ConnectFour:
             return "siirto epaonnistui"
         else:
             for i in range(0, 6):
-                if self.pelilauta[i][rivi] == 0:
-                    self.pelilauta[i][rivi] = self.tiedot.pelaaja
+                if self.tiedot.matriisi[i][rivi] == 0:
+                    self.tiedot.matriisi[i][rivi] = self.tiedot.pelaaja
                     break
             if self.voittava_siirto():
                 return "voittava siirto"
@@ -51,7 +51,7 @@ class ConnectFour:
             True: rivi on täynnä
             False: rivi ei ole täynnä
         """
-        if self.pelilauta[5][rivi] != 0:
+        if self.tiedot.matriisi[5][rivi] != 0:
             return True
         return False
 
@@ -65,24 +65,24 @@ class ConnectFour:
         # pystyssä
         for i in range(3):
             for j in range(7):
-                if self.pelilauta[i][j] == self.pelilauta[i+1][j] == self.pelilauta[i+2][j] == self.pelilauta[i+3][j] != 0:
+                if self.tiedot.matriisi[i][j] == self.tiedot.matriisi[i+1][j] == self.tiedot.matriisi[i+2][j] == self.tiedot.matriisi[i+3][j] != 0:
                     return True
         # vaakatasossa
         for i in range(6):
             for j in range(4):
-                if self.pelilauta[i][j] == self.pelilauta[i][j+1] == self.pelilauta[i][j+2] == self.pelilauta[i][j+3] != 0:
+                if self.tiedot.matriisi[i][j] == self.tiedot.matriisi[i][j+1] == self.tiedot.matriisi[i][j+2] == self.tiedot.matriisi[i][j+3] != 0:
                     return True
 
         # vinossa alas
         for i in range(3):
             for j in range(4):
-                if self.pelilauta[i][j] == self.pelilauta[i+1][j+1] == self.pelilauta[i+2][j+2] == self.pelilauta[i+3][j+3] != 0:
+                if self.tiedot.matriisi[i][j] == self.tiedot.matriisi[i+1][j+1] == self.tiedot.matriisi[i+2][j+2] == self.tiedot.matriisi[i+3][j+3] != 0:
                     return True
 
         # vinossa ylös
         for i in range(3, 6):
             for j in range(0, 4):
-                if self.pelilauta[i][j] == self.pelilauta[i-1][j+1] == self.pelilauta[i-2][j+2] == self.pelilauta[i-3][j+3] != 0:
+                if self.tiedot.matriisi[i][j] == self.tiedot.matriisi[i-1][j+1] == self.tiedot.matriisi[i-2][j+2] == self.tiedot.matriisi[i-3][j+3] != 0:
                     return True
         return False
 
@@ -93,7 +93,7 @@ class ConnectFour:
             True: lauta on täynnä
             False: lauta ei ole täynnä
         """
-        for i in self.pelilauta:
+        for i in self.tiedot.matriisi:
             for j in i:
                 if j == 0:
                     return False

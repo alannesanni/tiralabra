@@ -3,6 +3,7 @@ from ui import Kayttoliittyma
 
 
 def main():
+
     tiedot = Tiedot()
     ui = Kayttoliittyma(tiedot)
     ui.loop()
