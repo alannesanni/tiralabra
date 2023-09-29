@@ -18,22 +18,22 @@ class ConnectFour:
         #self.tiedot.matriisi = self.tiedot.matriisi
         self.pelaaja = self.tiedot.pelaaja
 
-    def vuoro(self, rivi):
-        """Kokeilee onko haluttu siirto mahdollinen, jos on niin asettaa nappulan alimmalle mahdolliselle sarakkeelle ja kertoo voittiko pelaaja siirrolla tai tuliko tasapeli.
+    def vuoro(self, sarake):
+        """Kokeilee onko haluttu siirto mahdollinen, jos on niin asettaa nappulan alimmalle mahdolliselle riville ja kertoo voittiko pelaaja siirrolla tai tuliko tasapeli.
 
         Args:
-            rivi: Rivi, jolle pelaaja haluaa asettaa nappulan
+            sarake: Sarake, jolle pelaaja haluaa asettaa nappulan
 
         Returns:
             Kertoo onnistuiko siirto, epäonnistuiko siirto, tuliko tasapeli tai voittiko pelaaja siirrolla
         """
-        rivi_taynna = self.rivi_taynna(rivi)
-        if rivi_taynna:
+        sarake_taynna = self.sarake_taynna(sarake)
+        if sarake_taynna:
             return "siirto epaonnistui"
         else:
             for i in range(0, 6):
-                if self.tiedot.matriisi[i][rivi] == 0:
-                    self.tiedot.matriisi[i][rivi] = self.tiedot.pelaaja
+                if self.tiedot.matriisi[i][sarake] == 0:
+                    self.tiedot.matriisi[i][sarake] = self.tiedot.pelaaja
                     break
             if self.voittava_siirto():
                 return "voittava siirto"
@@ -41,17 +41,17 @@ class ConnectFour:
                 return "lauta taynna"
             return "siirto onnistui"
 
-    def rivi_taynna(self, rivi):
-        """Tarkistaako onko annettu rivi täynnä.
+    def sarake_taynna(self, sarake):
+        """Tarkistaako onko annettu sarake täynnä.
 
         Args:
-            rivi: Tarkistettava rivi
+            sarake: Tarkistettava sarake
 
         Returns:
-            True: rivi on täynnä
-            False: rivi ei ole täynnä
+            True: sarake on täynnä
+            False: sarake ei ole täynnä
         """
-        if self.tiedot.matriisi[5][rivi] != 0:
+        if self.tiedot.matriisi[5][sarake] != 0:
             return True
         return False
 

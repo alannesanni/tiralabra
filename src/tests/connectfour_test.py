@@ -8,11 +8,11 @@ class TestConnectFour(unittest.TestCase):
         self.tiedot = Tiedot()
         self.connectfour = ConnectFour(self.tiedot)
 
-    def test_vuoro_rivi_taynna(self):
+    def test_vuoro_sarake_taynna(self):
         self.tiedot.matriisi = [[0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0], [
             0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 1]]
-        self.connectfour_rivi_taynna = ConnectFour(self.tiedot)
-        self.assertEqual(self.connectfour_rivi_taynna.vuoro(6),
+        self.connectfour_sarake_taynna = ConnectFour(self.tiedot)
+        self.assertEqual(self.connectfour_sarake_taynna.vuoro(6),
                          "siirto epaonnistui")
 
     def test_vuoro_voittava_siirto(self):
@@ -33,14 +33,14 @@ class TestConnectFour(unittest.TestCase):
     def test_vuoro_siirto_onnistui(self):
         self.assertEqual(self.connectfour.vuoro(0), "siirto onnistui")
 
-    def test_rivi_taynna_false(self):
-        self.assertEqual(self.connectfour.rivi_taynna(0), False)
+    def test_sarake_taynna_false(self):
+        self.assertEqual(self.connectfour.sarake_taynna(0), False)
 
-    def test_rivi_taynna_true(self):
+    def test_sarake_taynna_true(self):
         self.tiedot.matriisi = [[0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0], [
             0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 1]]
-        self.connectfour_rivi_taynna = ConnectFour(self.tiedot)
-        self.assertEqual(self.connectfour_rivi_taynna.rivi_taynna(6), True)
+        self.connectfour_sarake_taynna = ConnectFour(self.tiedot)
+        self.assertEqual(self.connectfour_sarake_taynna.sarake_taynna(6), True)
 
     def test_lauta_taynna_false(self):
         self.assertEqual(self.connectfour.lauta_taynna(), False)
