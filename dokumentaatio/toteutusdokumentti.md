@@ -1,5 +1,7 @@
 # Toteutusdokumentti
 
+Ohjelman kulku sekvenssikaaviona:
+
 ```mermaid
 sequenceDiagram
   participant main
@@ -23,5 +25,7 @@ sequenceDiagram
   Käyttöliittymä ->>Connectfour: vuoro(sarake)
   Connectfour ->>Tiedot: muokkaa pelilautaa
   Tiedot -->>Connectfour:    
-  Connectfour ->>Käyttöliittymä:  
+  Connectfour ->>Käyttöliittymä:
+  Käyttöliittymä -->>main:  
 ```
+Kaaviossa mallinnettu tilanne, jossa pelaajan vuoro on ensin. 
