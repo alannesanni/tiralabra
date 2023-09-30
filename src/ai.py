@@ -173,4 +173,6 @@ class Ai:
 
 if __name__=="__main__":
     tiedot=Tiedot()
+    tiedot.martiisi=[[2, 2, 1, 1, 1, 0, 0], [2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [
+            0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
     print(Ai(tiedot).minimax(VUOROT,True, MIN, MAX, tiedot.matriisi))
