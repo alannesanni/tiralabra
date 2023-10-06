@@ -2,15 +2,18 @@ from math import inf
 from entities.connectfour import ConnectFour
 from entities.tiedot import Tiedot
 from copy import deepcopy
-MIN=-inf
-MAX=inf
-VUOROT=3
+MIN = -inf
+MAX = inf
+VUOROT = 4
+
+
 class Ai:
     """Tekoälystä vastaava luokka.
 
     Attributes:
             tiedot: Pelin tiedot
     """
+
     def __init__(self, tiedot):
         """Luokan konstruktori, joka alustaa käytettävät tiedot.
         """
@@ -22,11 +25,11 @@ class Ai:
         Returns:
             Sarake, johon on paras tehdä seuraava siirto.
         """
-        kopiopelilauta=deepcopy(self.tiedot.matriisi)
-        return self.minimax(VUOROT,True,MIN, MAX, kopiopelilauta)[0]
+        kopiopelilauta = deepcopy(self.tiedot.matriisi)
+        return self.minimax(VUOROT, True, MIN, MAX, kopiopelilauta)[0]
 
     def minimax(self, syvyys, maxPelaaja, alpha, beta, lauta):
-        """
+        """Minimax-algoritmi alfa-beta karsinnalla.
 
         Args:
             syvyys: Kierrokset, kuinka pitkälle eteenpäin vuoroja lasketaan
@@ -38,46 +41,48 @@ class Ai:
         Returns:
             Sarake (johon on paras laittaa seuraava nappula), pisteet (laudan saamat pisteet jos laitetaan nappula parhaaseen sarakkeeseen)
         """
-        mahd_sarakkeet=self.mahdolliset_sarakkeet(lauta)
+        mahd_sarakkeet = self.mahdolliset_sarakkeet(lauta)
         if self.voittava_siirto(lauta, 2):
-            return None,MAX
+            return None, MAX
         elif self.voittava_siirto(lauta, 1):
-            return None,MIN
+            return None, MIN
         elif self.lauta_taynna(lauta):
-            return None,0
+            return None, 0
         elif syvyys == 0:
-            return None,self.pelilaudan_pisteytys(lauta)
-        
+            return None, self.pelilaudan_pisteytys(lauta)
+
         if maxPelaaja:
             paras = MIN
-            sarake=self.mahdolliset_sarakkeet(lauta)[0]
+            sarake = self.mahdolliset_sarakkeet(lauta)[0]
             for i in mahd_sarakkeet:
-                kopio_lauta=deepcopy(lauta)
-                kopio_lauta=self.siirto_kopio_laudalla(i,kopio_lauta, 2)
-                arvo = self.minimax(syvyys -1, False, alpha, beta, kopio_lauta)[1]
-                if arvo>paras:
-                    paras=arvo
-                    sarake=i
-                alpha=max(alpha, paras)
-                if beta<= alpha:
+                kopio_lauta = deepcopy(lauta)
+                kopio_lauta = self.siirto_kopio_laudalla(i, kopio_lauta, 2)
+                arvo = self.minimax(syvyys - 1, False,
+                                    alpha, beta, kopio_lauta)[1]
+                if arvo > paras:
+                    paras = arvo
+                    sarake = i
+                alpha = max(alpha, paras)
+                if beta <= alpha:
                     break
-            return sarake,paras
+            return sarake, paras
         else:
             paras = MAX
-            sarake=self.mahdolliset_sarakkeet(lauta)[0]
+            sarake = self.mahdolliset_sarakkeet(lauta)[0]
             for i in mahd_sarakkeet:
-                kopio_lauta=deepcopy(lauta)
-                kopio_lauta=self.siirto_kopio_laudalla(i,kopio_lauta, 1)
-                arvo = self.minimax(syvyys -1, True, alpha, beta, kopio_lauta)[1]
-                if arvo<paras:
-                    paras=arvo
-                    sarake=i
-                beta=min(beta, paras)
+                kopio_lauta = deepcopy(lauta)
+                kopio_lauta = self.siirto_kopio_laudalla(i, kopio_lauta, 1)
+                arvo = self.minimax(syvyys - 1, True, alpha,
+                                    beta, kopio_lauta)[1]
+                if arvo < paras:
+                    paras = arvo
+                    sarake = i
+                beta = min(beta, paras)
 
-                if beta<=alpha:
+                if beta <= alpha:
                     break
-            return sarake,paras
-        
+            return sarake, paras
+
     def lauta_taynna(self, lauta):
         """Tarkistaa onko pelilauta täynnä.
 
@@ -89,10 +94,10 @@ class Ai:
             False: pelilauta ei ole täynnä
         """
         for i in lauta[5]:
-            if i==0:
+            if i == 0:
                 return False
-        return True    
-                
+        return True
+
     def voittava_siirto(self, lauta, pelaaja):
         """Tarkistaa onko annettu pelaaja voittanut annetulla pelilaudalla.
 
@@ -144,7 +149,7 @@ class Ai:
                 return lauta
 
     def pelilaudan_pisteytys(self, lauta):
-        """Laskee kuinka hyvä pelilauta on tekoälyn kannalta. Tällä hetkellä antaa laudalle pisteitä vain jos siellä on voittava suora tai vähentää pisteitä jos laudalla on vastustajan voittama suora. 
+        """Laskee kuinka hyvä pelilauta on tekoälyn kannalta.
 
         Args:
             lauta: Pelilauta joka pisteytetään 
@@ -153,10 +158,125 @@ class Ai:
             Pelilaudan saamat pisteet
         """
         pisteet = 0
-        if self.voittava_siirto(lauta, 2):
-            pisteet+=100
-        if self.voittava_siirto(lauta, 1):
-            pisteet-=150
+        #3 omaa ja sivuilla 2 tyhjää
+        # vaakatasossa
+        for i in range(6):
+            for j in range(1,4):
+                nappulat=[lauta[i][j],lauta[i][j+1],lauta[i][j+2]]
+                if nappulat.count(2)==3:
+                    if lauta[i][j-1]==lauta[i][j+3]==0:
+                        pisteet+=10000
+        # vinossa alas
+        for i in range(1,2):
+            for j in range(1,3):
+                nappulat=[lauta[i][j],lauta[i+1][j+1],lauta[i+2][j+2]]
+                if nappulat.count(2)==3:
+                    if lauta[i-1][j-1]==lauta[i+3][j+3]==0:
+                        pisteet+=10000
+        # vinossa ylös
+        for i in range(4, 5):
+            for j in range(1, 3):
+                nappulat=[lauta[i][j],lauta[i-1][j+1],lauta[i-2][j+2]]
+                if nappulat.count(2)==3:
+                    if lauta[i+1][j-1]==lauta[i-3][j+3]==0:
+                        pisteet+=10000        
+
+        # 3 omaa ja 1 tyhjä
+        # pystysuorassa
+        for i in range(3):
+            for j in range(7):
+                nappulat=[lauta[i][j],lauta[i+1][j],lauta[i+2][j]]
+                if nappulat.count(2)==3 and lauta[i+3][j]==0:
+                    pisteet+=100
+
+        # vaakatasossa
+        for i in range(6):
+            for j in range(4):
+                nappulat=[lauta[i][j+1],lauta[i][j+2],lauta[i][j+3]]
+                if nappulat.count(2)==3 and nappulat.count(1)==0:
+                    pisteet+=100
+
+        # vinossa alas
+        for i in range(3):
+            for j in range(4):
+                nappulat=[lauta[i][j],lauta[i+1][j+1],lauta[i+2][j+2],lauta[i+3][j+3]]
+                if nappulat.count(2)==3 and nappulat.count(1)==0:
+                    pisteet+=100
+
+        # vinossa ylös
+        for i in range(3, 6):
+            for j in range(0, 4):
+                nappulat=[lauta[i][j],lauta[i-1][j+1],lauta[i-2][j+2],lauta[i-3][j+3]]
+                if nappulat.count(2)==3 and nappulat.count(1)==0:
+                    pisteet+=100
+
+        # 3 vastustajan ja 0 tai 1 oma
+        for i in range(3):
+            for j in range(7):
+                nappulat=[lauta[i][j],lauta[i+1][j],lauta[i+2][j]]
+                if nappulat.count(1)==3 and lauta[i+3][j]==0:
+                    pisteet-=10000
+                elif nappulat.count(1)==3 and lauta[i+3][j]==1:
+                    pisteet+=1000
+        # vaakatasossa
+        for i in range(6):
+            for j in range(4):
+                nappulat=[lauta[i][j],lauta[i][j+1],lauta[i][j+2],lauta[i][j+3]]
+                if nappulat.count(1)==3 and nappulat.count(2)==0:
+                    pisteet-=10000
+                elif nappulat.count(1)==3 and nappulat.count(2)==1:
+                    pisteet+=1000
+
+        # vinossa alas
+        for i in range(3):
+            for j in range(4):
+                nappulat=[lauta[i][j],lauta[i+1][j+1],lauta[i+2][j+2],lauta[i+3][j+3]]
+                if nappulat.count(1)==3 and nappulat.count(2)==0:
+                    pisteet-=10000
+                elif nappulat.count(1)==3 and nappulat.count(2)==1:
+                    pisteet+=1000
+
+        # vinossa ylös
+        for i in range(3, 6):
+            for j in range(0, 4):
+                nappulat=[lauta[i][j],lauta[i-1][j+1],lauta[i-2][j+2],lauta[i-3][j+3]]
+                if nappulat.count(1)==3 and nappulat.count(2)==0:
+                    pisteet-=10000
+                elif nappulat.count(1)==3 and nappulat.count(2)==1:
+                    pisteet+=1000
+
+        #2 omaa ja 2 tyhjää
+        for i in range(3):
+            for j in range(7):
+                nappulat=[lauta[i][j],lauta[i+1][j],lauta[i+2][j],lauta[i+3][j]]
+                if nappulat.count(2)==2 and nappulat.count(1)==0:
+                    pisteet+=50
+        # vaakatasossa
+        for i in range(6):
+            for j in range(4):
+                nappulat=[lauta[i][j+1],lauta[i][j+2],lauta[i][j+3]]
+                if nappulat.count(2)==2 and nappulat.count(1)==0:
+                    pisteet+=50
+        # vinossa alas
+        for i in range(3):
+            for j in range(4):
+                nappulat=[lauta[i][j],lauta[i+1][j+1],lauta[i+2][j+2],lauta[i+3][j+3]]
+                if nappulat.count(2)==2 and nappulat.count(1)==0:
+                    pisteet+=50
+        # vinossa ylös
+        for i in range(3, 6):
+            for j in range(0, 4):
+                nappulat=[lauta[i][j],lauta[i-1][j+1],lauta[i-2][j+2],lauta[i-3][j+3]]
+                if nappulat.count(2)==2 and nappulat.count(1)==0:
+                    pisteet+=50
+
+        #voidaanko laittaa keskelle
+        nappulat=[]
+        for rivi in lauta:
+            nappulat.append(rivi[3])
+        kerroin=nappulat.count(2)
+        pisteet+=10*kerroin
+
         return pisteet
 
     def mahdolliset_sarakkeet(self, lauta):
@@ -171,8 +291,4 @@ class Ai:
                 sarakkeet.append(i)
         return sarakkeet
 
-if __name__=="__main__":
-    tiedot=Tiedot()
-    tiedot.martiisi=[[2, 2, 1, 1, 1, 0, 0], [2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [
-            0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
-    print(Ai(tiedot).minimax(VUOROT,True, MIN, MAX, tiedot.matriisi))
+
