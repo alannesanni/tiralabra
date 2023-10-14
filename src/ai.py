@@ -171,30 +171,29 @@ class Ai:
             nappulat.append(rivi[3])
         kerroin = nappulat.count(2)
         pisteet += 10*kerroin
-
+        
         # 3 omaa ja sivuilla 2 tyhjää
         # vaakatasossa
         for i in range(6):
             for j in range(1, 4):
-                nappulat = [lauta[i][j], lauta[i][j+1], lauta[i][j+2]]
-                if nappulat.count(2) == 3:
+                if lauta[i][j] == lauta[i][j+1] == lauta[i][j+2]  == 2:
                     if lauta[i][j-1] == lauta[i][j+3] == 0:
                         pisteet += 100
         # vinossa alas
-        for i in range(1, 2):
-            for j in range(1, 3):
+        for i in range(1, 3):
+            for j in range(1, 4):
                 nappulat = [lauta[i][j], lauta[i+1][j+1], lauta[i+2][j+2]]
                 if nappulat.count(2) == 3:
                     if lauta[i-1][j-1] == lauta[i+3][j+3] == 0:
                         pisteet += 100
         # vinossa ylös
-        for i in range(4, 5):
-            for j in range(1, 3):
+        for i in range(3, 5):
+            for j in range(1, 4):
                 nappulat = [lauta[i][j], lauta[i-1][j+1], lauta[i-2][j+2]]
                 if nappulat.count(2) == 3:
                     if lauta[i+1][j-1] == lauta[i-3][j+3] == 0:
                         pisteet += 100
-
+        
         # 3 omaa ja 1 tyhjä
         # pystysuorassa
         for i in range(3):
@@ -221,19 +220,19 @@ class Ai:
 
         # vinossa ylös
         for i in range(3, 6):
-            for j in range(0, 4):
+            for j in range(4):
                 nappulat = [lauta[i][j], lauta[i-1][j+1],
                             lauta[i-2][j+2], lauta[i-3][j+3]]
                 if nappulat.count(2) == 3 and nappulat.count(1) == 0:
                     pisteet += 50
-
+        
         # 3 vastustajan ja 0 tai 1 oma
         for i in range(3):
             for j in range(7):
                 nappulat = [lauta[i][j], lauta[i+1][j], lauta[i+2][j]]
                 if nappulat.count(1) == 3 and lauta[i+3][j] == 0:
                     pisteet -= 15
-                elif nappulat.count(1) == 3 and lauta[i+3][j] == 1:
+                elif nappulat.count(1) == 3 and lauta[i+3][j] == 2:
                     pisteet += 30
         # vaakatasossa
         for i in range(6):
@@ -264,7 +263,7 @@ class Ai:
                     pisteet -= 15
                 elif nappulat.count(1) == 3 and nappulat.count(2) == 1:
                     pisteet += 30
-
+       
         return pisteet
 
     def mahdolliset_sarakkeet(self, lauta):
