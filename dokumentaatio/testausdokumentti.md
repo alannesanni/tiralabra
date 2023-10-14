@@ -8,7 +8,8 @@ Testikattavuusraportin saa komennolla `poetry run invoke coverage-report`
 
 Testikattavuusraportti:
 
-![image](https://github.com/alannesanni/tiralabra/assets/128046458/bc574fa2-e6a6-440f-80e9-f5a3bf292430)
+![image](https://github.com/alannesanni/tiralabra/assets/128046458/8ce9b3f4-195a-4c8d-af8f-018fb4da78ae)
+
 
 
 
