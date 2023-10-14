@@ -9,7 +9,7 @@
 - [Viikkoraportti 3](https://github.com/alannesanni/tiralabra/blob/main/dokumentaatio/viikkoraportti3.md)
 - [Viikkoraportti 4](https://github.com/alannesanni/tiralabra/blob/main/dokumentaatio/viikkoraportti4.md)
 - [Viikkoraportti 5](https://github.com/alannesanni/tiralabra/blob/main/dokumentaatio/viikkoraportti5.md)
-- [Viikkoraportti 6](https://github.com/alannesanni/tiralabra/blob/main/dokumentaatio/viikkoraportti5.md)
+- [Viikkoraportti 6](https://github.com/alannesanni/tiralabra/blob/main/dokumentaatio/viikkoraportti6.md)
 ### Komennot
 
 Riippuvuuksien asennus: `poerty install`
