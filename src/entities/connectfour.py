@@ -30,16 +30,16 @@ class ConnectFour:
         sarake_taynna = self.sarake_taynna(sarake)
         if sarake_taynna:
             return "siirto epaonnistui"
-        else:
-            for i in range(0, 6):
-                if self.tiedot.matriisi[i][sarake] == 0:
-                    self.tiedot.matriisi[i][sarake] = self.tiedot.pelaaja
-                    break
-            if self.voittava_siirto():
-                return "voittava siirto"
-            if self.lauta_taynna():
-                return "lauta taynna"
-            return "siirto onnistui"
+
+        for i in range(0, 6):
+            if self.tiedot.matriisi[i][sarake] == 0:
+                self.tiedot.matriisi[i][sarake] = self.tiedot.pelaaja
+                break
+        if self.voittava_siirto():
+            return "voittava siirto"
+        if self.lauta_taynna():
+            return "lauta taynna"
+        return "siirto onnistui"
 
     def sarake_taynna(self, sarake):
         """Tarkistaako onko annettu sarake täynnä.

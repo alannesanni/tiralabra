@@ -25,15 +25,15 @@ class TestAi(unittest.TestCase):
             0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 2, 0, 0, 0, 1, 0]]
         self.assertEqual(self.ai.mahdolliset_sarakkeet(
             self.tiedot.matriisi), [0, 2, 3, 4, 6])
-        
+
     def test_voittava_siirto(self):
-        pelilauta=[[1, 1, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [
+        pelilauta = [[1, 1, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [
             0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
         self.assertEqual(self.ai.voittava_siirto(pelilauta, 1), True)
-        pelilauta=[[2, 0, 0, 0, 0, 0, 0], [2, 0, 0, 0, 0, 0, 0], [2, 0, 0, 0, 0, 0, 0], [
+        pelilauta = [[2, 0, 0, 0, 0, 0, 0], [2, 0, 0, 0, 0, 0, 0], [2, 0, 0, 0, 0, 0, 0], [
             2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
         self.assertEqual(self.ai.voittava_siirto(pelilauta, 2), True)
-        
+
     def test_siirto_kopio_laudalla(self):
         self.assertEqual(self.ai.siirto_kopio_laudalla(3, self.tiedot.matriisi, 1), [[0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [
             0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]])
@@ -49,12 +49,13 @@ class TestAi(unittest.TestCase):
     def test_minimax(self):
         pelilauta = [[2, 0, 0, 0, 0, 0, 0], [0, 2, 0, 0, 0, 0, 0], [0, 0, 2, 0, 0, 0, 0], [
             0, 0, 0, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
-        self.assertEqual(self.ai.minimax(2, True, -1000000, 10000000, pelilauta), (None, inf ))
+        self.assertEqual(self.ai.minimax(2, True, -1000000,
+                         10000000, pelilauta), (None, inf))
         pelilauta = [[0, 0, 0, 1, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0], [
             1, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0]]
-        self.assertEqual(self.ai.minimax(2, True, -1000000, 10000000, pelilauta), (None, -inf ))
+        self.assertEqual(self.ai.minimax(2, True, -1000000,
+                         10000000, pelilauta), (None, -inf))
         pelilauta = [[0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [
-            0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [1, 2, 1, 2,1, 2, 1]]
-        self.assertEqual(self.ai.minimax(2, True, -1000000, 10000000, pelilauta), (None, 0 ))
-
-
+            0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0], [1, 2, 1, 2, 1, 2, 1]]
+        self.assertEqual(self.ai.minimax(
+            2, True, -1000000, 10000000, pelilauta), (None, 0))

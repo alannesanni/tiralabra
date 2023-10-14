@@ -1,6 +1,5 @@
 import sys
 import pygame
-from entities.tiedot import Tiedot
 from entities.connectfour import ConnectFour
 from ai import Ai
 
@@ -25,7 +24,6 @@ class Kayttoliittyma:
         self.tiedot = tiedot
         self.leveys = 700
         self.korkeus = 700
-        self.pelilauta = tiedot.matriisi
         self.peli = ConnectFour(self.tiedot)
         self.naytto = pygame.display.set_mode((self.leveys, self.korkeus))
         self.pelaaja = tiedot.pelaaja
@@ -78,7 +76,7 @@ class Kayttoliittyma:
                 rivi = (hiiri[0]//100)
                 self.palautus = self.peli.vuoro(rivi)
                 self.paivita_pelin_tila()
-                if self.pelin_tila == "normaali":
+                if self.pelin_tila == "normaali" and self.palautus != "siirto epaonnistui":
                     self.tiedot.vaihda_pelaaja()
 
     def paivita_pelin_tila(self):
