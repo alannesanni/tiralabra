@@ -6,6 +6,6 @@ Kirjoitin lisää testejä ja korjasin vanhoja testejä.
 
 Paransin koodin laatua lint ohjeiden avulla parhaani mukaan. 
 
-Seuraavaksi koitan vielä saada tekoälyä pelaamaan vieläkin paremmin. Nyt se "luovuttaa" lopussa jos ei ole mahdollista voittaa, vaikka sen pitäisi tähdätä tasapeliin.
+Seuraavaksi koitan vielä saada tekoälyä pelaamaan vieläkin paremmin. Nyt se esimerkiksi "luovuttaa" lopussa jos ei ole mahdollista voittaa, vaikka sen pitäisi tähdätä tasapeliin.
 
 työaika: 10h
