@@ -31,6 +31,8 @@ sequenceDiagram
 Kaaviossa mallinnettu tilanne, jossa pelaajan vuoro on ensin. 
 
 
+
+
 **Lähteet:**
 
 https://en.wikipedia.org/wiki/Minimax 

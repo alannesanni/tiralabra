@@ -171,7 +171,7 @@ class Ai:
             nappulat.append(rivi[3])
         kerroin = nappulat.count(2)
         pisteet += 10*kerroin
-        
+       
         # 3 omaa ja sivuilla 2 tyhjää
         # vaakatasossa
         for i in range(6):
