@@ -15,4 +15,4 @@ Kaikki pelilogiikan ja tekoälyn funktiot on testattu mahdollisimman tarkasti yk
 
 Minimax algoritmia on testattu muutamalla erilaisella pelitilanteella, joissa tekoälyn on mahdollista voittaa 6 siirrolla (3 omalla siirrolla). Olen etsinty tälläiset pelitilanteet connect four solverin avulla. 
 
-Pisteytys funktiota on testattu antamalla funkiolle kuvitteellisia satunnaisia pelitilanteita. Olen testien yhteydessä laskenut oikeiden pisteiden määrän, jotta on helpompi varmistua tuloksen oikeellisuudesta.
+Pisteytys funktiota on testattu antamalla funkiolle kuvitteellisia satunnaisia pelitilanteita. Olen testien yhteydessä laskenut oikeiden pisteiden määrän, jotta voidaan varmistua tuloksen oikeellisuudesta.

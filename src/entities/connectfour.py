@@ -1,6 +1,6 @@
 
 class ConnectFour:
-    """Luokka, jossa on pelin oleelliste funktiot.
+    """Luokka, jossa on pelin oleelliset funktiot.
 
     Attributes:
             tiedot: Pelin tiedot
@@ -12,11 +12,8 @@ class ConnectFour:
         Args:
             tiedot: Pelin tiedot
             pelilauta: Käytettävä pelilauta
-            pelaaja= Vuorossa oleva pelaaja
         """
         self.tiedot = tiedot
-        #self.tiedot.matriisi = self.tiedot.matriisi
-        self.pelaaja = self.tiedot.pelaaja
 
     def vuoro(self, sarake):
         """Kokeilee onko haluttu siirto mahdollinen, jos on niin asettaa nappulan alimmalle mahdolliselle riville ja kertoo voittiko pelaaja siirrolla tai tuliko tasapeli.

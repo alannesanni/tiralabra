@@ -1,6 +1,4 @@
 from math import inf
-from entities.connectfour import ConnectFour
-from entities.tiedot import Tiedot
 from copy import deepcopy
 MIN = -inf
 MAX = inf
@@ -20,7 +18,8 @@ class Ai:
         self.tiedot = tiedot
 
     def valitse_paras_siirto(self):
-        """Funktio, jota kutsutaan Ui luokan loop-funktiossa.
+        """Funktio, jota kutsutaan Ui luokan loop-funktiossa. 
+        Tarkistaa ensin onko mahdollista saada voitto yhdellä siirrolla, jos ei ole niin etsii parhaan mahdollisen seuraavan siirron kutsumalla minimax-funktiota.
 
         Returns:
             Sarake, johon on paras tehdä seuraava siirto.
@@ -35,7 +34,7 @@ class Ai:
         kopiopelilauta = deepcopy(self.tiedot.matriisi)
         return self.minimax(VUOROT, True, MIN, MAX, kopiopelilauta)[0]
 
-    def minimax(self, syvyys, maxPelaaja, alpha, beta, lauta):
+    def minimax(self, syvyys, max_pelaaja, alpha, beta, lauta):
         """Minimax-algoritmi alfa-beta karsinnalla.
 
         Args:
@@ -51,14 +50,14 @@ class Ai:
         mahd_sarakkeet = self.mahdolliset_sarakkeet(lauta)
         if self.voittava_siirto(lauta, 2):
             return None, MAX
-        elif self.voittava_siirto(lauta, 1):
+        if self.voittava_siirto(lauta, 1):
             return None, MIN
-        elif self.lauta_taynna(lauta):
+        if self.lauta_taynna(lauta):
             return None, 0
-        elif syvyys == 0:
+        if syvyys == 0:
             return None, self.pelilaudan_pisteytys(lauta)
 
-        if maxPelaaja:
+        if max_pelaaja:
             paras = MIN
             sarake = self.mahdolliset_sarakkeet(lauta)[0]
             for i in mahd_sarakkeet:
@@ -154,6 +153,7 @@ class Ai:
             if lauta[rivi][sarake] == 0:
                 lauta[rivi][sarake] = pelaaja
                 return lauta
+        return None
 
     def pelilaudan_pisteytys(self, lauta):
         """Laskee kuinka hyvä pelilauta on tekoälyn kannalta.
@@ -171,12 +171,12 @@ class Ai:
             nappulat.append(rivi[3])
         kerroin = nappulat.count(2)
         pisteet += 10*kerroin
-       
+
         # 3 omaa ja sivuilla 2 tyhjää
         # vaakatasossa
         for i in range(6):
             for j in range(1, 4):
-                if lauta[i][j] == lauta[i][j+1] == lauta[i][j+2]  == 2:
+                if lauta[i][j] == lauta[i][j+1] == lauta[i][j+2] == 2:
                     if lauta[i][j-1] == lauta[i][j+3] == 0:
                         pisteet += 100
         # vinossa alas
@@ -193,7 +193,7 @@ class Ai:
                 if nappulat.count(2) == 3:
                     if lauta[i+1][j-1] == lauta[i-3][j+3] == 0:
                         pisteet += 100
-        
+
         # 3 omaa ja 1 tyhjä
         # pystysuorassa
         for i in range(3):
@@ -225,7 +225,7 @@ class Ai:
                             lauta[i-2][j+2], lauta[i-3][j+3]]
                 if nappulat.count(2) == 3 and nappulat.count(1) == 0:
                     pisteet += 50
-        
+
         # 3 vastustajan ja 0 tai 1 oma
         for i in range(3):
             for j in range(7):
@@ -263,7 +263,7 @@ class Ai:
                     pisteet -= 15
                 elif nappulat.count(1) == 3 and nappulat.count(2) == 1:
                     pisteet += 30
-       
+
         return pisteet
 
     def mahdolliset_sarakkeet(self, lauta):

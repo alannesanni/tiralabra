@@ -32,7 +32,9 @@ class Kayttoliittyma:
         pygame.display.set_caption("ConnectFour")
 
     def loop(self):
-        """Pelilogiikasta vastaava funktio, joka kutsuu eri funktioita riippuen pelin tilasta. Jos tila on normaali, tarkistaa kumman pelaajan vuoro on. Jos on ihmispelaajan vuoro, niin kutsuu tapahtumat funktiota ja jos on tietokoneen vuoro niin kutsuu Ai luokkaa ja sen parhaan rivin etsivää funktiota.
+        """Pelilogiikasta vastaava funktio, joka kutsuu eri funktioita riippuen pelin tilasta. 
+        Jos tila on normaali, tarkistaa kumman pelaajan vuoro on. 
+        Jos on ihmispelaajan vuoro, niin kutsuu tapahtumat funktiota ja jos on tietokoneen vuoro niin kutsuu Ai luokkaa ja sen parhaan rivin etsivää funktiota.
         """
         kello = pygame.time.Clock()
         while True:
@@ -59,7 +61,9 @@ class Kayttoliittyma:
             kello.tick(30)
 
     def tapahtumat(self):
-        """Tarkistaa käyttäjältä tulevat syötteet ja toimii niiden mukaan. Jos halutaan asettaa uusi nappula funktio kutsuu ConnectFour-luokan vuoro-funktiota, jolloin pelilaudan tila päivittyy. Jos siirto onnistuu vaihdetaan lopussa vuoro toiselle pelaajalle.
+        """Tarkistaa käyttäjältä tulevat syötteet ja toimii niiden mukaan. 
+        Jos halutaan asettaa uusi nappula, funktio kutsuu ConnectFour-luokan vuoro-funktiota. 
+        Jos siirto onnistuu vaihdetaan lopussa vuoro toiselle pelaajalle.
         """
         for tapahtuma in pygame.event.get():
             if tapahtuma.type == pygame.QUIT:
@@ -73,7 +77,7 @@ class Kayttoliittyma:
 
             if tapahtuma.type == pygame.MOUSEBUTTONDOWN and self.pelin_tila == "normaali":
                 hiiri = pygame.mouse.get_pos()
-                rivi = (hiiri[0]//100)
+                rivi = hiiri[0]//100
                 self.palautus = self.peli.vuoro(rivi)
                 self.paivita_pelin_tila()
                 if self.pelin_tila == "normaali" and self.palautus != "siirto epaonnistui":
