@@ -8,7 +8,7 @@ Testikattavuusraportin saa komennolla `poetry run invoke coverage-report`
 
 Testikattavuusraportti:
 
-![image](https://github.com/alannesanni/tiralabra/assets/128046458/8ce9b3f4-195a-4c8d-af8f-018fb4da78ae)
+![image](https://github.com/alannesanni/tiralabra/assets/128046458/45b6b43f-3411-41f8-a2bc-9deb96462a74)
 
 
 Kaikki pelilogiikan ja tekoälyn funktiot on testattu mahdollisimman tarkasti yksikkötesteillä. 
